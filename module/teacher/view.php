@@ -49,12 +49,12 @@
                             <tbody>
                                 <?php
                                 include_once('config.php');
-                                $sql = "SELECT teachers.id AS idt, teachers.nip, teachers.name, teachers.pob, teachers.dob, teachers.phone, teachers.photo, subjects.subject  FROM teachers JOIN subjects ON subjects.id=teachers.subject_id ORDER BY name ASC";
+                                $sql = "SELECT teachers.id AS idt, teachers.nip, teachers.name, teachers.pob, teachers.dob, teachers.wa, teachers.photo, subjects.subject  FROM teachers JOIN subjects ON subjects.id=teachers.subject_id";
                                 $result = mysqli_query($config, $sql);
                                 if (mysqli_num_rows($result) > 0) {
                                     $no = 1;
                                     while ($row = mysqli_fetch_assoc($result)) {
-                                    $photo = $row['photo']? $row['photo']:'logo.jpeg';
+                                    $photo = $row['photo']? $row['photo']:'logo.png';
                                     echo '<tr>
                         <td align="center">' . $no . '</td>
                         <td><img src="assets/imgs/teachers/small_' . $photo . '" width="100"></td>
@@ -62,11 +62,11 @@
                         <td>' . $row['name'] . '</td>
                         <td>' . $row['pob'] . '</td>
                         <td>' . date('d F Y', strtotime($row['dob'])) . '</td>
-                        <td>' . $row['phone'] . '</td>
+                        <td>' . $row['wa'] . '</td>
                         <td>' . $row['subject'] . '</td>
                         <td>
                             <a href="?m=teacher&s=edit&id=' . $row['idt'] . '"class= "btn btn-warning btn-sm"><i class="fas fa-edit"></i>Edit</a>
-                            <a href="?m=teacher&s=delete&id=' . $row['idt'] . '" onclick="return confirm(\'Yakin Akan Dihapus\')" class= "btn btn-danger btn-sm"><i class="fas fa-trash"></i>Delete</a>
+                            <a href="?m=teacher&s=delete&id=' . $row['idt'] . '" onclick="return zconfirm(\'Yakin Akan Dihapus\')" class= "btn btn-danger btn-sm"><i class="fas fa-trash"></i>Delete</a>
                         </td>
                         </tr>';
                                         $no++;
